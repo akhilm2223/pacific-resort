@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pacific Trails Resort :: Yurts</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pacific.css">
+  <script src="modernizr.custom.05819.js"></script>
+  <script>
+    function showPromotion() {
+      var today = new Date();
+      var dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+      var promoMessage;
+      
+      // Different promotion based on day of week
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        promoMessage = "Weekend Special - 10% off with coupon code ZenTen!";
+      } else {
+        promoMessage = "Weekday Special - Book 2 nights, get 1 free with code EXTRA!";
+      }
+      
+      alert("Today only - " + promoMessage);
+    }
+  </script>
+</head>
+<body onload="showPromotion();">
+  <div id="wrapper">
+    <header>
+      <h1>Pacific Trails Resort</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="yurts.html">Yurts</a></li>
+        <li><a href="activities.html">Activities</a></li>
+        <li><a href="reservations.html">Reservations</a></li>
+      </ul>
+    </nav>
+    <img src="./R (2).jpeg" alt="Pacific Coast Sunset" style="width:100%;max-height:300px;object-fit:contain;background:#000;" />
+    <main>
+      <h2>The Yurts at Pacific Trails</h2>
+      <div class="clear">
+        <section class="onethird">
+          <h3>What is a yurt?</h3>
+          <p>Our luxury yurts are permanent structures four feet off the ground. Each yurt is fully enclosed with canvas walls, a wooden floor, and a roof dome that can be opened.</p>
+        </section>
+        <section class="onethird">
+          <h3>How are the yurts furnished?</h3>
+          <p>Each yurt is furnished with a queen-size bed with down quilt and gas-fired stove. Your luxury camping experience includes electricity and a sink with hot and cold running water. Shower and restroom facilities are located in the lodge.</p>
+        </section>
+        <section class="onethird">
+          <h3>What should I bring?</h3>
+          <p>Most guests pack comfortable walking shoes and plan to dress for changing weather with light layers of clothing. It's also helpful to bring a flashlight and a sense of adventure!</p>
+        </section>
+      </div>
+      <h3>Yurt Packages</h3>
+      <p>A variety of luxury yurt packages are available. Choose a package below and contact us to begin your reservation. We're happy to build a custom package just for you!</p>
+      <table>
+        <tr>
+          <th>Package Name</th>
+          <th>Description</th>
+          <th>Nights</th>
+          <th>Cost per Person</th>
+        </tr>
+        <tr>
+          <td>Weekend Escape</td>
+          <td>Two breakfasts, a trail map, and a picnic snack</td>
+          <td>2</td>
+          <td>$450</td>
+        </tr>
+        <tr>
+          <td>Zen Retreat</td>
+          <td>Four breakfasts, a trail map, a picnic snack, and a pass for the daily sunrise Yoga session</td>
+          <td>4</td>
+          <td>$600</td>
+        </tr>
+        <tr>
+          <td>Kayak Away</td>
+          <td>Two breakfasts, two hours of kayak rental daily, and a trail map</td>
+          <td>2</td>
+          <td>$500</td>
+        </tr>
+      </table>
+      
+      <h3>Calculate Your Stay</h3>
+      <div id="calculator">
+        <p>How many nights would you like to stay?
+          <input type="number" id="nights" min="1" max="14" value="1">
+        </p>
+        <p>Select package:
+          <select id="package">
+            <option value="450">Weekend Escape ($450/person)</option>
+            <option value="600">Zen Retreat ($600/person)</option>
+            <option value="500">Kayak Away ($500/person)</option>
+          </select>
+        </p>
+        <p>Number of people:
+          <input type="number" id="people" min="1" max="4" value="2">
+        </p>
+        <button type="button" onclick="calculateTotal()">Calculate Total</button>
+        <p id="totalCost"></p>
+      </div>
+      
+      <script>
+        function calculateTotal() {
+          // Get input values
+          var nights = document.getElementById("nights").value;
+          var packageCost = document.getElementById("package").value;
+          var people = document.getElementById("people").value;
+          
+          // Calculate total cost
+          var nightlyRate = packageCost / 2; // Divide by package nights (assuming 2)
+          var additionalNights = nights > 2 ? nights - 2 : 0;
+          var totalCost = (parseFloat(packageCost) * people) + (additionalNights * nightlyRate * people);
+          
+          // Apply discount for stays of 7+ nights
+          if (nights >= 7) {
+            totalCost = totalCost * 0.9; // 10% discount
+            document.getElementById("totalCost").innerHTML = 
+              "Total cost: $" + totalCost.toFixed(2) + " (includes 10% weekly discount)";
+          } else {
+            document.getElementById("totalCost").innerHTML = 
+              "Total cost: $" + totalCost.toFixed(2);
+          }
+        }
+      </script>
+    </main>
+    <footer>
+      Copyright &copy; 2018 Pacific Trails Resort<br>
+      <a href="mailto:contact@pacifictrails.net">contact@pacifictrails.net</a>
+    </footer>
+  </div>
+</body>
+</html>
